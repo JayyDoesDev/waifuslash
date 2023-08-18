@@ -47,7 +47,7 @@ export class RequestManager {
         return await fetch(this.api + opts.options.endpoint, request).then((x) => {
             x.json()
             .then((res) => {
-                return resolve(res);
+                return resolve(res) as T;
             })
             .catch(() => {
                 resolve(null);
