@@ -91,7 +91,7 @@ export class Routes {
     }
   }
 
-  static builkOverGlobalApplicationCommands(applicationId: Snowflake): string {
+  static bulkOverGlobalApplicationCommands(applicationId: Snowflake): string {
     if (applicationId) {
       return "/applications/" + applicationId + "/commands";
     } else if (!(typeof applicationId === "string")) {
@@ -174,6 +174,86 @@ export class Routes {
     } else {
       throw new ReferenceError(
         "[waifuslash#Routes] Application ID, guild ID, and command ID must be snowflakes and must be strings."
+      );
+    }
+  }
+
+  static editGuildApplicationCommand(options: {
+    applicationId: Snowflake;
+    guildId: Snowflake;
+    commandId: Snowflake;
+  }): string {
+    if (options.applicationId && options.guildId && options.commandId) {
+      return (
+        "/applications/" +
+        options.applicationId +
+        "/guilds/" +
+        options.guildId +
+        "/commands/" +
+        options.commandId
+      );
+    } else if (
+      !(typeof options.applicationId === "string") ||
+      !(typeof options.guildId === "string") ||
+      !(typeof options.commandId === "string")
+    ) {
+      throw new ReferenceError(
+        "[waifuslash#Routes] Must provide a snowflake for all of the following. Application ID, guild ID, and command ID. They must be strings."
+      );
+    } else {
+      throw new ReferenceError(
+        "[waifuslash#Routes] Application ID, guild ID, and command ID must be snowflakes and must be strings."
+      );
+    }
+  }
+
+  static deleteGuildApplicationCommand(options: {
+    applicationId: Snowflake;
+    guildId: Snowflake;
+    commandId: Snowflake;
+  }): string {
+    if (options.applicationId && options.guildId && options.commandId) {
+      return (
+        "/applications/" +
+        options.applicationId +
+        "/guilds/" +
+        options.guildId +
+        "/commands/" +
+        options.commandId
+      );
+    } else if (
+      !(typeof options.applicationId === "string") ||
+      !(typeof options.guildId === "string") ||
+      !(typeof options.commandId === "string")
+    ) {
+      throw new ReferenceError(
+        "[waifuslash#Routes] Must provide a snowflake for all of the following. Application ID, guild ID, and command ID. They must be strings."
+      );
+    } else {
+      throw new ReferenceError(
+        "[waifuslash#Routes] Application ID, guild ID, and command ID must be snowflakes and must be strings."
+      );
+    }
+  }
+
+  static bulkOverwriteGuildApplicationCommands(
+    applicationId: Snowflake,
+    guildId: Snowflake
+  ): string {
+    if (applicationId && guildId) {
+      return (
+        "/applications/" + applicationId + "/guilds/" + guildId + "/commands"
+      );
+    } else if (
+      !(typeof applicationId === "string") ||
+      !(typeof guildId === "string")
+    ) {
+      throw new ReferenceError(
+        "[waifuslash#Routes] Must provide a snowflake for both application ID and guild ID. They must be strings."
+      );
+    } else {
+      throw new ReferenceError(
+        "[waifuslash#Routes] Application ID and guild ID must be snowflakes and must be strings."
       );
     }
   }
