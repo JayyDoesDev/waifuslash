@@ -1,6 +1,7 @@
 import type { Snowflake } from "./@type";
 import type { ApplicationCommandLocalization } from "./ApplicationCommandLocalization";
-import type { ApplicationCommandType } from "./ApplicationCommandType";
+import { ApplicationCommandType } from "./ApplicationCommandType";
+import { ApplicationCommandOptions } from "./ApplicationCommandOptions";
 
 export interface ApplicationCommand {
   /**
@@ -45,4 +46,34 @@ export interface ApplicationCommand {
    * @returns {ApplicationCommandLocalization}
    */
   description_localizations?: ApplicationCommandLocalization;
+  /**
+   * options
+   * Parameters for the command, max of 25
+   * @returns {ApplicationCommandOptions[]}
+   */
+  options?: ApplicationCommandOptions[];
+  /**
+   * default_member_permissions
+   * Set of permissions represented as a bit set
+   * @returns string
+   */
+  default_member_permissions: string;
+  /**
+   * dm_permission
+   * Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible.
+   * @returns boolean
+   */
+  dm_permission?: boolean;
+  /**
+   * nsfw
+   * Indicates whether the command is age-restricted, defaults to false
+   * @returns boolean
+   */
+  nsfw?: boolean;
+  /**
+   * version
+   * Autoincrementing version identifier updated during substantial record changes
+   * @returns {Snowflake}
+   */
+  version: Snowflake;
 }
