@@ -34,12 +34,12 @@ export class RequestManager {
     this.api = api;
   }
   public async GET<T>(
-    method: METHOD,
     route: string,
+    method: METHOD,
     headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
-    data?: Object
+    data?: Object | null
   ): Promise<T | void> {
-    await this.request({
+    await this.request<T>({
         options: {
             method: method,
             endpoint: route,
@@ -48,6 +48,54 @@ export class RequestManager {
         data: data
     }) as T;
   }
+
+  public async PUT<T>(
+    route: string,
+    method: METHOD,
+    headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
+    data?: Object | null,
+  ): Promise<T | void> {
+    await this.request<T>({
+      options: {
+        method: method,
+        endpoint: route,
+        contentType: headers
+      },
+      data: data
+    }) as T;
+  }
+
+  public async PATCH<T>(
+    route: string,
+    method: METHOD,
+    headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
+    data?: Object | null
+  ): Promise<T | void> {
+    await this.request<T>({
+      options: {
+        method: method,
+        endpoint: route,
+        contentType: headers
+      },
+      data: data
+    }) as T;
+  }
+
+  public async DELETE<T>(
+    route: string,
+    method: METHOD,
+    headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
+    data?: Object | null
+  ): Promise<T | void> {
+    await this.request<T>({
+      options: {
+        method: method,
+        endpoint: route,
+        contentType: headers
+      },
+      data: data
+    }) as T;
+  } 
 
   private async request<T>(opts: IRquestOptions): Promise<T | void> {
     const request: IRequest = {
