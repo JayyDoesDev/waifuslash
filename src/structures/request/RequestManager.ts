@@ -6,7 +6,6 @@ import {
   IMAGE_TYPE,
   TEXT_TYPE,
 } from "./typings";
-import { Routes } from "../Routes";
 
 export interface IRequest {
   method: METHOD;

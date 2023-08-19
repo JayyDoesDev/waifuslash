@@ -1,6 +1,6 @@
-import { Snowflake } from "./@type";
-import { ApplicationCommandLocalization } from "./ApplicationCommandLocalization";
-import { ApplicationCommandType } from "./ApplicationCommandType";
+import type { Snowflake } from "./@type";
+import type { ApplicationCommandLocalization } from "./ApplicationCommandLocalization";
+import type { ApplicationCommandType } from "./ApplicationCommandType";
 
 export interface ApplicationCommand {
   /**

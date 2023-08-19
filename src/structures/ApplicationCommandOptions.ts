@@ -9,5 +9,5 @@ export interface ApplicationCommandOptions {
     description: string;
     description_localizations?: ApplicationCommandLocalization;
     required?: boolean;
-    choices?: ApplicationCommandOptionsChoice
+    choices?: ApplicationCommandOptionsChoice[]
 }
