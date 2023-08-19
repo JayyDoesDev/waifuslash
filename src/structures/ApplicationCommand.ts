@@ -9,7 +9,7 @@ export interface ApplicationCommand {
    * Unique ID of command
    * @returns {Snowflake}
    */
-  id: Snowflake;
+   id: Snowflake;
   /**
    * type
    * Type of command, defaults to 1

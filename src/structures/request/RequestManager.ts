@@ -34,13 +34,27 @@ export class RequestManager {
   }
   public async GET<T>(
     route: string,
-    method: METHOD,
     headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
     data?: Object | null
   ): Promise<T | void> {
     await this.request<T>({
         options: {
-            method: method,
+            method: METHOD.GET,
+            endpoint: route,
+            contentType: headers
+        },
+        data: data
+    }) as T;
+  }
+
+  public async POST<T>(
+    route: string,
+    headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
+    data?: Object | null
+  ): Promise<T | void> {
+    await this.request<T>({
+        options: {
+            method: METHOD.POST,
             endpoint: route,
             contentType: headers
         },
@@ -50,13 +64,12 @@ export class RequestManager {
 
   public async PUT<T>(
     route: string,
-    method: METHOD,
     headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
     data?: Object | null,
   ): Promise<T | void> {
     await this.request<T>({
       options: {
-        method: method,
+        method: METHOD.PUT,
         endpoint: route,
         contentType: headers
       },
@@ -66,13 +79,12 @@ export class RequestManager {
 
   public async PATCH<T>(
     route: string,
-    method: METHOD,
     headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
     data?: Object | null
   ): Promise<T | void> {
     await this.request<T>({
       options: {
-        method: method,
+        method: METHOD.PATCH,
         endpoint: route,
         contentType: headers
       },
@@ -82,13 +94,12 @@ export class RequestManager {
 
   public async DELETE<T>(
     route: string,
-    method: METHOD,
     headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
     data?: Object | null
   ): Promise<T | void> {
     await this.request<T>({
       options: {
-        method: method,
+        method: METHOD.DELETE,
         endpoint: route,
         contentType: headers
       },
@@ -97,17 +108,19 @@ export class RequestManager {
   } 
 
   private async request<T>(opts: IRquestOptions): Promise<T | void> {
+    console.log("Bot " + this.token,)
     const request: IRequest = {
       method: opts.options.method,
       headers: {
         "Content-Type": opts.options.contentType,
-        Authorization: this.token,
+        Authorization: "Bot " + this.token,
       },
     };
 
     return new Promise(async (resolve, reject) => {
       return await fetch(this.api + opts.options.endpoint, request).then(
         (x) => {
+          console.log(x)
           x.json()
             .then((res) => {
               return resolve(res) as T;

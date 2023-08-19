@@ -7,5 +7,7 @@ export * from "./ApplicationCommandOptionsChoice";
 export * from "./ApplicationCommandOptionType";
 export * from "./ChannelType";
 export * from "./ChannelTypeEnum";
+export * from "./Command";
+export * from "./WaifuSlash";
 export * from "./Routes";
 export * from "./request/typings/index";
