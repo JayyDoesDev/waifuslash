@@ -83,7 +83,7 @@ export class WaifuSlash {
   public async massCreateGuildCommand(
     guildId: Snowflake,
     ...command: ICommand[]
-  ): Promise<void> {
+  ): Promise<ApplicationCommand | void> {
     if (Array.isArray(command)) {
       command.forEach((e) => {
         this.createGuildCommand(guildId, e);
@@ -95,7 +95,9 @@ export class WaifuSlash {
     }
   }
 
-  public async massCreateGlobalCommand(...command: ICommand[]): Promise<void> {
+  public async massCreateGlobalCommand(
+    ...command: ICommand[]
+  ): Promise<ApplicationCommand | void> {
     if (Array.isArray(command)) {
       command.forEach((e) => {
         this.createGlobalCommand(e);
