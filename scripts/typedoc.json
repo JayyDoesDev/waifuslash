@@ -1,0 +1,10 @@
+{
+    "out": "../docs",
+    "name": "waifuslash",
+    "readme": "./README.md",
+    "theme": "default",
+    "entryPoints": ["../dist/index.d.ts"],
+    "excludeExternals": false,
+    "excludePrivate": false,
+    "excludeInternal": false
+  }
