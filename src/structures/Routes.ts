@@ -5,7 +5,7 @@ export class Routes {
 
   static getApplicationCommands(applicationId: Snowflake): string {
     if (applicationId) {
-      return "/applications/" + applicationId + "/commands";
+      return "/applications/" + applicationId + "/commands?with_localizations=true";
     } else if (!(typeof applicationId === "string")) {
       throw new ReferenceError(
         "[waifuslash#Routes] Application ID must be a Snowflake."
@@ -111,7 +111,7 @@ export class Routes {
   ): string {
     if (applicationId && guildId) {
       return (
-        "/applications/" + applicationId + "/guilds/" + guildId + "/commands"
+        "/applications/" + applicationId + "/guilds/" + guildId + "/commands?with_localizations=true"
       );
     } else if (
       !(typeof applicationId === "string") ||

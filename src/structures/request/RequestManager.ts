@@ -117,10 +117,11 @@ export class RequestManager {
         "User-Agent": "Discordbot waifuslashLib",
         Authorization:  `Bot ${this.token}`,
       },
-      body: JSON.stringify(opts.data) || {}
+      body: JSON.stringify(opts.data)
     };
 
     return new Promise(async (resolve, reject) => {
+      console.log(request)
       return await fetch(this.api + opts.options.endpoint, request).then(
         (x) => {
           x.json()

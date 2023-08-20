@@ -35,14 +35,11 @@ export class WaifuSlash {
     );
   }
 
-  public async getGlobalCommands(with_localizations?: boolean): Promise<void> {
+  public async getGlobalCommands(): Promise<void> {
     await this.waifu.GET<ApplicationCommand>(
-        Routes.getApplicationCommands(this.options.botID),
-        APPLICATION_TYPE.JSON,
-        {
-            with_localizations: with_localizations,
-        }
-    )
+      Routes.getApplicationCommands(this.options.botID),
+      APPLICATION_TYPE.JSON
+    );
   }
 
   public async createGuildCommand(
@@ -53,6 +50,29 @@ export class WaifuSlash {
       Routes.createGuildApplicationCommand(this.options.botID, guildId),
       APPLICATION_TYPE.JSON,
       command
+    )) as ApplicationCommand;
+  }
+
+  public async getGuildCommands(guildId: Snowflake): Promise<void> {
+    await this.waifu.GET<ApplicationCommand>(
+      Routes.getGuildApplicationCommands(this.options.botID, guildId),
+      APPLICATION_TYPE.JSON
+    );
+  }
+
+  public async editGuildCommand(options: {
+    guildId: Snowflake;
+    commandId: string;
+    command: ICommand;
+  }): Promise<void> {
+    (await this.waifu.PATCH<ApplicationCommand>(
+      Routes.editGuildApplicationCommand({
+        applicationId: this.options.botID,
+        guildId: options.guildId,
+        commandId: options.commandId,
+      }),
+      APPLICATION_TYPE.JSON,
+      options.command
     )) as ApplicationCommand;
   }
 
