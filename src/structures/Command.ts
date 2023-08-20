@@ -29,7 +29,7 @@ export class Command implements Partial<ICommand> {
     return this;
   }
 
-  public toJSON(): Object {
-    return JSON.stringify({...this})
-  }
+  public toJSON(): ICommand {
+    return {...this} as ICommand;
+  }  
 }

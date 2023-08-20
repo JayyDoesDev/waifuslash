@@ -11,8 +11,10 @@ export interface IRequest {
   method: METHOD;
   headers: {
     "Content-Type": APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE;
+    "User-Agent": string;
     Authorization: string;
   };
+  body?: Object | any;
 }
 
 export interface IRquestOptions {
@@ -108,21 +110,22 @@ export class RequestManager {
   } 
 
   private async request<T>(opts: IRquestOptions): Promise<T | void> {
-    console.log("Bot " + this.token,)
     const request: IRequest = {
       method: opts.options.method,
       headers: {
         "Content-Type": opts.options.contentType,
-        Authorization: "Bot " + this.token,
+        "User-Agent": "Discordbot waifuslashLib",
+        Authorization:  `Bot ${this.token}`,
       },
+      body: JSON.stringify(opts.data) || {}
     };
 
     return new Promise(async (resolve, reject) => {
       return await fetch(this.api + opts.options.endpoint, request).then(
         (x) => {
-          console.log(x)
           x.json()
             .then((res) => {
+              console.log(res)
               return resolve(res) as T;
             })
             .catch(() => {
