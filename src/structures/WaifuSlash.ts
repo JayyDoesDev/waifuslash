@@ -80,6 +80,31 @@ export class WaifuSlash {
     )) as ApplicationCommand;
   }
 
+  public async deleteGuildCommand(
+    guildId: Snowflake,
+    commandId: string
+  ): Promise<void> {
+    this.waifu.DELETE<ApplicationCommand>(
+      Routes.deleteGuildApplicationCommand({
+        applicationId: this.options.botID,
+        guildId: guildId,
+        commandId: commandId,
+      }),
+      APPLICATION_TYPE.JSON
+    );
+  }
+
+  public async overwriteGuildCommands(
+    guildId: Snowflake,
+    command: ICommand
+  ): Promise<void> {
+    this.waifu.PUT<ApplicationCommand>(
+      Routes.bulkOverwriteGuildApplicationCommands(this.options.botID, guildId),
+      APPLICATION_TYPE.JSON,
+      command
+    );
+  }
+
   public async massCreateGuildCommand(
     guildId: Snowflake,
     ...command: ICommand[]
