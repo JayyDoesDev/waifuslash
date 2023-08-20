@@ -27,25 +27,27 @@ export class WaifuSlash {
     return this.options.botToken;
   }
 
-  public async createGlobalCommand(command: ICommand): Promise<void> {
-    await this.waifu.POST<ApplicationCommand>(
+  public async createGlobalCommand(
+    command: ICommand
+  ): Promise<ApplicationCommand | void> {
+    (await this.waifu.POST<ApplicationCommand>(
       Routes.createApplicationCommand(this.options.botID),
       APPLICATION_TYPE.JSON,
       command
-    );
+    )) as ApplicationCommand;
   }
 
-  public async getGlobalCommands(): Promise<void> {
-    await this.waifu.GET<ApplicationCommand>(
+  public async getGlobalCommands(): Promise<ApplicationCommand[] | void> {
+    (await this.waifu.GET<ApplicationCommand>(
       Routes.getApplicationCommands(this.options.botID),
       APPLICATION_TYPE.JSON
-    );
+    )) as ApplicationCommand;
   }
 
   public async createGuildCommand(
     guildId: Snowflake,
     command: ICommand
-  ): Promise<void> {
+  ): Promise<ApplicationCommand | void> {
     (await this.waifu.POST<ApplicationCommand>(
       Routes.createGuildApplicationCommand(this.options.botID, guildId),
       APPLICATION_TYPE.JSON,
@@ -53,11 +55,13 @@ export class WaifuSlash {
     )) as ApplicationCommand;
   }
 
-  public async getGuildCommands(guildId: Snowflake): Promise<void> {
-    await this.waifu.GET<ApplicationCommand>(
+  public async getGuildCommands(
+    guildId: Snowflake
+  ): Promise<ApplicationCommand[] | void> {
+    (await this.waifu.GET<ApplicationCommand>(
       Routes.getGuildApplicationCommands(this.options.botID, guildId),
       APPLICATION_TYPE.JSON
-    );
+    )) as ApplicationCommand;
   }
 
   public async editGuildCommand(options: {
