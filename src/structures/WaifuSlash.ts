@@ -44,6 +44,14 @@ export class WaifuSlash {
     )) as ApplicationCommand;
   }
 
+  public async overwriteGlobalCommands(command: ICommand): Promise<void> {
+    this.waifu.PUT<ApplicationCommand>(
+      Routes.bulkOverGlobalApplicationCommands(this.options.botID),
+      APPLICATION_TYPE.JSON,
+      command
+    );
+  }
+
   public async createGuildCommand(
     guildId: Snowflake,
     command: ICommand
@@ -103,34 +111,5 @@ export class WaifuSlash {
       APPLICATION_TYPE.JSON,
       command
     );
-  }
-
-  public async massCreateGuildCommand(
-    guildId: Snowflake,
-    ...command: ICommand[]
-  ): Promise<ApplicationCommand | void> {
-    if (Array.isArray(command)) {
-      command.forEach((e) => {
-        this.createGuildCommand(guildId, e);
-      });
-    } else {
-      throw new ReferenceError(
-        "[waifuslash#WaifuSlash] Command must be an array."
-      );
-    }
-  }
-
-  public async massCreateGlobalCommand(
-    ...command: ICommand[]
-  ): Promise<ApplicationCommand | void> {
-    if (Array.isArray(command)) {
-      command.forEach((e) => {
-        this.createGlobalCommand(e);
-      });
-    } else {
-      throw new ReferenceError(
-        "[waifuslash#WaifuSlash] Command must be an array."
-      );
-    }
   }
 }
