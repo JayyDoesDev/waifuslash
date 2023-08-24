@@ -10,13 +10,19 @@ export class WaifuSlash {
   constructor(
     protected readonly options: {
       botID: string;
+      publicKey: string;
       botToken: string;
     }
   ) {
     this.api = "https://discord.com/api/v10";
     this.options.botID = options.botID;
+    this.options.publicKey = options.publicKey;
     this.options.botToken = options.botToken;
-    this.waifu = new RequestManager(this.options.botToken, this.api);
+    this.waifu = new RequestManager(
+      this.options.publicKey,
+      this.options.botToken,
+      this.api
+    );
   }
 
   get botID() {

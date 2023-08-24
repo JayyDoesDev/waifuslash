@@ -6,7 +6,8 @@
   "author": "J_DDev <69683068+JayyDoesDev@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "start": "node tests/test.js"
   },
   "devDependencies": {
     "ts-node-dev": "^2.0.0",

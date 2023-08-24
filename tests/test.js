@@ -37,7 +37,7 @@ const blepCommand = new Command()
     },
   ]);
 async function test() {
-  await waifu.deleteGuildCommand("845605014663856158", "1142661941777682432");
+  await waifu.getGuildCommands("845605014663856158");
 }
 
 test();

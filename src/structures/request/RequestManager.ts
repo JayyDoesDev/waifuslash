@@ -8,6 +8,7 @@ import {
 } from "./typings";
 
 export interface IRequest {
+  publicKey?: boolean;
   method: METHOD;
   headers: {
     "Content-Type": APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE;
@@ -18,6 +19,7 @@ export interface IRequest {
 }
 
 export interface IRquestOptions {
+  publicKey?: boolean;
   options: {
     method: METHOD;
     endpoint: string;
@@ -28,9 +30,11 @@ export interface IRquestOptions {
 
 export class RequestManager {
   constructor(
-    public token: string, 
+    public publicKey: string,
+    public token: string,
     public api: string
   ) {
+    this.publicKey = publicKey;
     this.token = token;
     this.api = api;
   }
@@ -39,14 +43,14 @@ export class RequestManager {
     headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
     data?: Object | null
   ): Promise<T | void> {
-    await this.request<T>({
-        options: {
-            method: METHOD.GET,
-            endpoint: route,
-            contentType: headers
-        },
-        data: data
-    }) as T;
+    (await this.request<T>({
+      options: {
+        method: METHOD.GET,
+        endpoint: route,
+        contentType: headers,
+      },
+      data: data,
+    })) as T;
   }
 
   public async POST<T>(
@@ -54,29 +58,29 @@ export class RequestManager {
     headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
     data?: Object | null
   ): Promise<T | void> {
-    await this.request<T>({
-        options: {
-            method: METHOD.POST,
-            endpoint: route,
-            contentType: headers
-        },
-        data: data
-    }) as T;
+    (await this.request<T>({
+      options: {
+        method: METHOD.POST,
+        endpoint: route,
+        contentType: headers,
+      },
+      data: data,
+    })) as T;
   }
 
   public async PUT<T>(
     route: string,
     headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
-    data?: Object | null,
+    data?: Object | null
   ): Promise<T | void> {
-    await this.request<T>({
+    (await this.request<T>({
       options: {
         method: METHOD.PUT,
         endpoint: route,
-        contentType: headers
+        contentType: headers,
       },
-      data: data
-    }) as T;
+      data: data,
+    })) as T;
   }
 
   public async PATCH<T>(
@@ -84,14 +88,14 @@ export class RequestManager {
     headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
     data?: Object | null
   ): Promise<T | void> {
-    await this.request<T>({
+    (await this.request<T>({
       options: {
         method: METHOD.PATCH,
         endpoint: route,
-        contentType: headers
+        contentType: headers,
       },
-      data: data
-    }) as T;
+      data: data,
+    })) as T;
   }
 
   public async DELETE<T>(
@@ -99,34 +103,39 @@ export class RequestManager {
     headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
     data?: Object | null
   ): Promise<T | void> {
-    await this.request<T>({
+    (await this.request<T>({
       options: {
         method: METHOD.DELETE,
         endpoint: route,
-        contentType: headers
+        contentType: headers,
       },
-      data: data
-    }) as T;
-  } 
+      data: data,
+    })) as T;
+  }
 
   private async request<T>(opts: IRquestOptions): Promise<T | void> {
-    const request: IRequest = {
+    let request: IRequest = {
       method: opts.options.method,
       headers: {
         "Content-Type": opts.options.contentType,
         "User-Agent": "Discordbot waifuslashLib",
-        Authorization:  `Bot ${this.token}`,
+        Authorization: "",
       },
-      body: JSON.stringify(opts.data)
+      body: JSON.stringify(opts.data),
     };
 
+    if (opts.publicKey) {
+      request.headers.Authorization = `Bearer ${this.publicKey}`;
+    } else {
+      request.headers.Authorization = `Bot ${this.token}`;
+    }
     return new Promise(async (resolve, reject) => {
-      console.log(request)
+      console.log(request);
       return await fetch(this.api + opts.options.endpoint, request).then(
         (x) => {
           x.json()
             .then((res) => {
-              console.log(res)
+              console.log(res);
               return resolve(res) as T;
             })
             .catch(() => {
@@ -137,4 +146,3 @@ export class RequestManager {
     });
   }
 }
-
