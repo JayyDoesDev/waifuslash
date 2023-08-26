@@ -6,6 +6,7 @@ const {
 } = require("../dist");
 const config = require("./config.json");
 const waifu = new WaifuSlash({
+  publicKey: config.publicKey,
   botID: config.botID,
   botToken: config.botToken,
 });

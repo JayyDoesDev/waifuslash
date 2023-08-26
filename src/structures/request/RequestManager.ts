@@ -28,6 +28,13 @@ export interface IRquestOptions {
   data?: Object | void;
 }
 
+export interface IRequestMethodOptions {
+  publicKey?: boolean;
+  route: string;
+  contentType: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE;
+  data?: Object | null;
+}
+
 export class RequestManager {
   constructor(
     public publicKey: string,
@@ -38,78 +45,63 @@ export class RequestManager {
     this.token = token;
     this.api = api;
   }
-  public async GET<T>(
-    route: string,
-    headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
-    data?: Object | null
-  ): Promise<T | void> {
+  public async GET<T>(opts: IRequestMethodOptions): Promise<T | void> {
     (await this.request<T>({
+      publicKey: opts.publicKey,
       options: {
         method: METHOD.GET,
-        endpoint: route,
-        contentType: headers,
+        endpoint: opts.route,
+        contentType: opts.contentType,
       },
-      data: data,
+      data: opts.data,
     })) as T;
   }
 
-  public async POST<T>(
-    route: string,
-    headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
-    data?: Object | null
-  ): Promise<T | void> {
+  public async POST<T>(opts: IRequestMethodOptions): Promise<T | void> {
     (await this.request<T>({
+      publicKey: opts.publicKey,
       options: {
         method: METHOD.POST,
-        endpoint: route,
-        contentType: headers,
+        endpoint: opts.route,
+        contentType: opts.contentType,
       },
-      data: data,
+      data: opts.data,
     })) as T;
   }
 
-  public async PUT<T>(
-    route: string,
-    headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
-    data?: Object | null
-  ): Promise<T | void> {
+  public async PUT<T>(opts: IRequestMethodOptions): Promise<T | void> {
     (await this.request<T>({
+      publicKey: opts.publicKey,
       options: {
         method: METHOD.PUT,
-        endpoint: route,
-        contentType: headers,
+        endpoint: opts.route,
+        contentType: opts.contentType,
       },
-      data: data,
+      data: opts.data,
     })) as T;
   }
 
-  public async PATCH<T>(
-    route: string,
-    headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
-    data?: Object | null
-  ): Promise<T | void> {
+  public async PATCH<T>(opts: IRequestMethodOptions): Promise<T | void> {
     (await this.request<T>({
+      publicKey: opts.publicKey,
       options: {
         method: METHOD.PATCH,
-        endpoint: route,
-        contentType: headers,
+        endpoint: opts.route,
+        contentType: opts.contentType,
       },
-      data: data,
+      data: opts.data,
     })) as T;
   }
 
-  public async DELETE<T>(
-    route: string,
-    headers: APPLICATION_TYPE | AUDIO_TYPE | IMAGE_TYPE | TEXT_TYPE,
-    data?: Object | null
-  ): Promise<T | void> {
+  public async DELETE<T>(opts: IRequestMethodOptions): Promise<T | void> {
     (await this.request<T>({
+      publicKey: opts.publicKey,
       options: {
         method: METHOD.DELETE,
-        endpoint: route,
-        contentType: headers,
+        endpoint: opts.route,
+        contentType: opts.contentType,
       },
-      data: data,
+      data: opts.data,
     })) as T;
   }
 
