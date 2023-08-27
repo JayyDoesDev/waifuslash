@@ -10,14 +10,14 @@ export class WaifuSlash {
   private api: string;
   constructor(
     protected readonly options: {
-      botID: string;
       publicKey: string;
+      botID: string;
       botToken: string;
     }
   ) {
     this.api = "https://discord.com/api/v10";
-    this.options.botID = options.botID;
     this.options.publicKey = options.publicKey;
+    this.options.botID = options.botID;
     this.options.botToken = options.botToken;
     this.waifu = new RequestManager(
       this.options.publicKey,
@@ -42,6 +42,36 @@ export class WaifuSlash {
       contentType: APPLICATION_TYPE.JSON,
       data: command,
     })) as ApplicationCommand;
+  }
+
+  public async getGlobalCommand(
+    commandId: string
+  ): Promise<ApplicationCommand | void> {
+    (await this.waifu.GET<ApplicationCommand>({
+      route: Routes.getGlobalApplicationCommand(this.options.botID, commandId),
+      contentType: APPLICATION_TYPE.JSON,
+    })) as ApplicationCommand;
+  }
+
+  public async editGlobalCommand(
+    commandId: string,
+    command: ICommand
+  ): Promise<ApplicationCommand | void> {
+    (await this.waifu.PATCH<ApplicationCommand>({
+      route: Routes.editGlobalApplicationCommand(this.options.botID, commandId),
+      contentType: APPLICATION_TYPE.JSON,
+      data: command,
+    })) as ApplicationCommand;
+  }
+
+  public async deleteGlobalCommand(commandId: string): Promise<void> {
+    await this.waifu.DELETE<ApplicationCommand>({
+      route: Routes.deleteGlobalApplicationCommand(
+        this.options.botID,
+        commandId
+      ),
+      contentType: APPLICATION_TYPE.JSON,
+    });
   }
 
   public async getGlobalCommands(): Promise<ApplicationCommand[] | void> {
@@ -76,14 +106,14 @@ export class WaifuSlash {
     (await this.waifu.GET<ApplicationCommand>({
       route: Routes.getGuildApplicationCommands(this.options.botID, guildId),
       contentType: APPLICATION_TYPE.JSON,
-    })) as ApplicationCommand;
+    })) as unknown as ApplicationCommand[];
   }
 
   public async editGuildCommand(options: {
     guildId: Snowflake;
     commandId: string;
     command: ICommand;
-  }): Promise<void> {
+  }): Promise<ApplicationCommand | void> {
     (await this.waifu.PATCH<ApplicationCommand>({
       route: Routes.editGuildApplicationCommand({
         applicationId: this.options.botID,

@@ -38,7 +38,7 @@ const blepCommand = new Command()
     },
   ]);
 async function test() {
-  await waifu.getGuildCommands("845605014663856158");
+  await waifu.getGlobalCommands();
 }
 
 test();
