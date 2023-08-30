@@ -1,5 +1,5 @@
 <p align="center">
-   <img src="https://github.com/JayyDoesDev/waifuslash/blob/main/.github/assets/power.jpg" alt="power" width="300" height="300">
+   <img src="https://raw.githubusercontent.com/JayyDoesDev/waifuslash/main/.github/assets/power.jpg" alt="power" width="300" height="300">
 </p>
 
 # waifuslash
