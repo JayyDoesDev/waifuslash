@@ -1,12 +1,13 @@
 {
   "name": "waifuslash",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "J_DDev <69683068+JayyDoesDev@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
+    "prepublish": "yarn build",
     "start": "node tests/test.js"
   },
   "devDependencies": {
