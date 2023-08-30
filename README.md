@@ -1,5 +1,13 @@
+<p align="center">
+   <img src="https://github.com/JayyDoesDev/waifuslash/blob/main/.github/assets/power.jpg" alt="power" width="300" height="300">
+</p>
+
 # waifuslash
  Waifu slash is a discord slash command library made for Discord! :3
+
+ `npm i waifuslash`
+ 
+ `yarn add waifuslash`
 
 # Usage
 
@@ -21,3 +29,5 @@ async function main() {
 }
 
 main();
+```
+All rights reserved to the owners for the "Power" character
