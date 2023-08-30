@@ -1,6 +1,6 @@
 {
   "name": "waifuslash",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "J_DDev <69683068+JayyDoesDev@users.noreply.github.com>",
@@ -16,5 +16,19 @@
   },
   "dependencies": {
     "cross-fetch": "^4.0.0"
-  }
+  },
+  "keywords": [
+    "discord",
+    "discord-bot",
+    "waifu",
+    "slash",
+    "slash-commands",
+    "command",
+    "commands",
+    "discord-commands",
+    "discord-slash",
+    "commands-discord",
+    "slash-discord",
+    "slashy"
+  ]
 }
