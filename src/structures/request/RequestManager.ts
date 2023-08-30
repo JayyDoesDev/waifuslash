@@ -122,7 +122,6 @@ export class RequestManager {
       request.headers.Authorization = `Bot ${this.token}`;
     }
     return new Promise(async (resolve, reject) => {
-      console.log(request);
       return await fetch(this.api + opts.options.endpoint, request).then(
         (x) => {
           x.json()
