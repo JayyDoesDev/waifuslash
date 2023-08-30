@@ -110,7 +110,7 @@ export class RequestManager {
       method: opts.options.method,
       headers: {
         "Content-Type": opts.options.contentType,
-        "User-Agent": "Discordbot waifuslashLib",
+        "User-Agent": "Discordbot waifuslash",
         Authorization: "",
       },
       body: JSON.stringify(opts.data),
@@ -127,7 +127,6 @@ export class RequestManager {
         (x) => {
           x.json()
             .then((res) => {
-              console.log(res);
               return resolve(res) as T;
             })
             .catch(() => {
