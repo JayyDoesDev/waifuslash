@@ -1,3 +1,5 @@
+# PLEASE USE https://github.com/antibot-team/interactions AS ITS A MAINTAINED FORK
+
 <p align="center">
    <img src="https://raw.githubusercontent.com/JayyDoesDev/waifuslash/main/.github/assets/power.jpg" alt="power" width="300" height="300">
 </p>
